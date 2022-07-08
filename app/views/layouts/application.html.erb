@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LethathamoLaMosebetsi</title>
+    <title>Lethathamo</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <header class="header">
+      <%= content_tag(:h1, t('app.brand_name'), class: 'h1 text-white text-center') %>
+    </header>
+    <main class="boards-container">
     <%= yield %>
+    </main>
   </body>
 </html>
