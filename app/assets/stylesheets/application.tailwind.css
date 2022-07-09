@@ -2,12 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
 @layer components {
+  .header {
+    @apply py-12 bg-secondary flex justify-center
+  }
+  .h1 {
+    @apply text-2xl lg:text-4xl xl:text-6xl font-bold
+  }
+  .boards-container {
+    @apply min-h-screen w-full bg-light-accent
+  }
   .btn-primary {
     @apply py-2 px-4 bg-blue-200;
   }
+  .main-layout {
+    @apply w-11/12 lg:max-w-3xl mx-auto
+  }
 }
-
-*/
