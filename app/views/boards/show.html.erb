@@ -3,7 +3,7 @@
   <%= content_tag(:section) do%>
     <div class="flex items-center justify-between">
         <%= content_tag(:h3, t('app.todo'), class: 'h4') %>
-        <%= link_to t('app.add'), new_board_todo_path(@board), class: 'underline' %>
+        <%= link_to t('app.add'), new_board_task_path(@board), class: 'underline' %>
     </div>
   <% end %>
   <%= content_tag(:section) do%>
