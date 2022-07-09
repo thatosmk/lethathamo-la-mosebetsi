@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   resources :boards,
     except: %i[destroy] do
-      resources :todos
+      resources :tasks
 
   end
 
