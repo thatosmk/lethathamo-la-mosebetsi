@@ -2,6 +2,7 @@
 
 class ApplicationClient
 
+  include ActiveSupport::Configurable
 
   def connection
     @_connection ||= Faraday.new(url) do |faraday|
@@ -14,4 +15,5 @@ class ApplicationClient
       faraday.adapter :net_http
     end
   end
+
 end

@@ -11,4 +11,5 @@ class ApplicationService
       @msg = msg
     end
   end
+
 end

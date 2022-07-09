@@ -2,8 +2,6 @@
 
 class TrelloClient < ApplicationClient
 
-  include ActiveSupport::Configurable
-
   attr_reader \
     :base_uri,
     :url
