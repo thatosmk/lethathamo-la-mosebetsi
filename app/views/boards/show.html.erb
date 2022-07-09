@@ -1,0 +1,16 @@
+<%= content_tag(:div, class: 'main-layout') do%>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8">
+  <%= content_tag(:section) do%>
+    <div class="flex items-center justify-between">
+        <%= content_tag(:h3, t('app.todo'), class: 'h4') %>
+        <%= link_to t('app.add'), new_board_task_path(@board), class: 'underline' %>
+    </div>
+  <% end %>
+  <%= content_tag(:section) do%>
+    <%= content_tag(:h3, t('app.doing'), class: 'h4') %>
+  <% end %>
+  <%= content_tag(:section) do%>
+    <%= content_tag(:h3, t('app.done'), class: 'h4') %>
+  <% end %>
+  </div>
+<% end %>

@@ -9,8 +9,6 @@
 </p>
 
 This is a task management app that integrates with Trello.
-<<<<<<< Updated upstream
-=======
 
 ## Getting started
 
@@ -38,4 +36,3 @@ This project is built with a Ruby on Rails backend. The database architecture of
 ### Improvements
 
 - Use of UUIDs over integers for table primary_key values
->>>>>>> Stashed changes
