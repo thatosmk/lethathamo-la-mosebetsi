@@ -44,6 +44,12 @@ jobs:
         with:
           node-version: 14.2.0
 
+      - name: Set up PostgreSQL
+        run: |
+          sudo apt-get install postgresql libpq-dev
+          sudo service postgresql start
+          sudo -u postgres createuser --superuser "$USER"
+
       - name: Find yarn cache location
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
