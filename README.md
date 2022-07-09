@@ -36,3 +36,5 @@ This project is built with a Ruby on Rails backend. The database architecture of
 ### Improvements
 
 - Use of UUIDs over integers for table primary_key values
+- Use of `form_objects` pattern to design the forms for capturing data and sending it to Trello
+- Integration with [Sentry](https://sentry.io) for error tracking

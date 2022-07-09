@@ -1,3 +1,10 @@
 <%= content_tag(:section, class: 'main-layout') do%>
+  <%= content_tag(:ul, class: 'divide-y') do %>
+    <% @boards.each do |board|%>
+      <li>
+      <%= link_to board.name, board, class: 'hover:underline text-primary' %>
+      </li>
+    <% end %>
+  <% end %>
   <%= link_to t('app.boards.new'), new_board_path, class: 'underline' %>
 <% end %>

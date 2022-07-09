@@ -11,7 +11,8 @@ class TasksController < ApplicationController
     @task = board.tasks.build(task_params.merge({ status: 0}))
 
     if @task.valid?
-      @task.save
+      # @task.save
+      Boards::CreateCardOnTrelloService.call(board: board, card: task)
       redirect_to board_path(board)
     else
       render :new, status: :unprocessable_entity
