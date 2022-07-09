@@ -59,7 +59,7 @@ test:
   <<: *default
   database: lethathamo_la_mosebetsi_test
   username: <%= ENV.fetch('POSTGRES_USER', '')%>
-  password: <%= ENV.fetch('POSTGRES_PASS', '')%>
+  password: <%= ENV.fetch('POSTGRES_PASSWORD', '')%>
   host: localhost
   port: 5432
 
