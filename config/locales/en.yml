@@ -31,4 +31,12 @@
 
 en:
   app:
+    add: Add
     brand_name: "The Pizza Project"
+    doing: Doing
+    done: Done
+    submit: Create
+    todo: To do
+
+    boards:
+      new: Add new board
