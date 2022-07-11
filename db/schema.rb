@@ -10,13 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_09_163758) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_09_203247) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "boards", force: :cascade do |t|
     t.string "name"
     t.boolean "deleted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.jsonb "trello", default: {}
+  end
+
+  create_table "lists", force: :cascade do |t|
+    t.string "name"
+    t.integer "pos"
+    t.integer "board_id"
+    t.string "trello_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -29,6 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_09_163758) do
     t.integer "board_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "list_id"
   end
 
 end
