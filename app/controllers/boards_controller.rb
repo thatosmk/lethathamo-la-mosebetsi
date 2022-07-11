@@ -39,11 +39,16 @@ class BoardsController < ApplicationController
     end
 
     def find_trello_boards
-      @_find_trello_boards ||= Boards::GetTrelloBoardService.call
+      @_find_trello_boards ||= AppServicesJob.perform_later(
+        'Boards::GetTrelloBoardService'
+      )
     end
 
     def fetch_cards_for_board
-      @_fetch_cards_for_board ||= Boards::GetBoardCardsService.call(board: board)
+      @_fetch_cards_for_board ||= AppServicesJob.perform_later(
+        'Boards::GetBoardCardsService',
+        { board: board }
+      )
     end
 
 end

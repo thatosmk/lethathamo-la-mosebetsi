@@ -11,10 +11,12 @@ class Boards::GetBoardCardsService < ApplicationService
 
   def call
     begin
-      trello_api = TrelloClient.new(url: "/boards/#{board.trello_id}/cards?")
-      board_cards = trello_api.trello_data
+      trello_lists = TrelloClient.new(url: "/boards/#{board.trello_id}/lists?").trello_data
 
-      assign_cards_to_board(board_cards)
+      trello_cards = TrelloClient.new(url: "/boards/#{board.trello_id}/cards?").trello_data
+
+      assign_lists_to_board(trello_lists)
+      assign_cards_to_lists(trello_cards)
     rescue UnsuccessfulResponse => e
       # TODO: Sent these errors to sentry
       puts e
@@ -23,12 +25,39 @@ class Boards::GetBoardCardsService < ApplicationService
 
   private
 
-    def assign_cards_to_board(cards)
+    def assign_lists_to_board(lists)
+      lists.each do |trello_list|
+        list = List.find_or_create_by(name: trello_list[:name])
+        list.update(
+          board:     board,
+          trello_id: trello_list[:id],
+          pos:       trello_list[:pos]
+        )
+        list.broadcast_append_to(
+          board,
+          :board_lists,
+          target:  "frameBoardLists-#{board.id}",
+          partial: 'lists/list',
+          locals:  { list: list }
+        )
+      end
+    end
+
+    def assign_cards_to_lists(cards)
       cards.each do |card|
         list = List.find_by(trello_id: card[:idList])
 
-        new_card = Task.new(card[:name], board: board, list: list)
-        return new_card.save if new_card.valid?
+        if list
+          new_card = Task.find_or_create_by(name: card[:name], board_id: board.id, list_id: list.id)
+         
+          new_card.broadcast_append_to(
+            list,
+            :list_cards,
+            target: "frameListCards-#{list.id}",
+            partial: 'tasks/task',
+            locals: { card: new_card }
+          )
+        end
 
         false
       end

@@ -1,0 +1,5 @@
+    <%= content_tag(:section, id: :frameBoards) do %>
+      <% boards.each do |board|%>
+        <%= render 'boards/board', board: board %>
+      <% end %>
+    <% end %>

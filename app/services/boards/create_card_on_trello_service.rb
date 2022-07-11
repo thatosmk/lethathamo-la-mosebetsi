@@ -3,18 +3,17 @@
 class Boards::CreateCardOnTrelloService < ApplicationService
 
   attr_reader \
-    :board,
+    :list,
     :card
 
-  def initialize(board:, list: ,card:)
-    @board = board
+  def initialize(list:, card:)
     @card  = card
     @list  = list
   end
 
   def call
     begin
-      trello_api = TrelloClient.new(url: "/cards?idList=#{list.trello_id}&")
+      trello_api = TrelloClient.new(url: "/cards?idList=#{list.trello_id}&name=#{card.name}&")
 
       trello_api.push_data(card)
     rescue UnsuccessfulResponse => e

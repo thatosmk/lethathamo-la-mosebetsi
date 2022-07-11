@@ -25,18 +25,26 @@ class Boards::GetTrelloBoardService < ApplicationService
       end.first
     end
 
-    def create_board(board)
-      board = Board.find_or_initialize_by(name: board[:name])
+    def create_board(trello_board)
+      board = Board.find_or_initialize_by(name: trello_board[:name])
 
       return board if board.persisted?
 
       board.assign_attributes(
-        trello_id:   board[:id],
-        trello_name: board[:name],
-        trello_url:  board[:url]
+        trello_id:   trello_board[:id],
+        trello_name: trello_board[:name],
+        trello_url:  trello_board[:url]
       )
 
-      return board.save if board.valid?
+      if board.valid?
+        board.save
+        board.broadcast_append_to(
+          :boards_stream,
+          target:  :frameBoards,
+          partial: 'boards/board',
+          locals:  { board: board }
+        )
+      end
       false
     end
 

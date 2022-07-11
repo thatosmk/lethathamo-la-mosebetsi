@@ -1,10 +1,13 @@
+<%= turbo_frame_tag :frameAppHeader do %>
+  <%= content_tag(:header, class: 'header') do %>
+    <%= content_tag(:h1, t('app.brand_name'), class: 'h1 text-white') %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream_from :boards_stream %>
 <%= content_tag(:section, class: 'main-layout') do%>
   <%= content_tag(:ul, class: 'divide-y') do %>
-    <% @boards.each do |board|%>
-      <li>
-      <%= link_to board.name, board, class: 'hover:underline text-primary' %>
-      </li>
-    <% end %>
+    <%= render 'boards/boards', boards: @boards %>
+    <%= link_to t('app.boards.new'), new_board_path, class: 'underline' %>
   <% end %>
-  <%= link_to t('app.boards.new'), new_board_path, class: 'underline' %>
 <% end %>

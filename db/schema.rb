@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema[7.0].define(version: 2022_07_09_203247) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "boards", force: :cascade do |t|
@@ -26,7 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_09_203247) do
     t.string "name"
     t.integer "pos"
     t.integer "board_id"
-    t.uuid "trello_id"
+    t.string "trello_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,6 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_09_203247) do
     t.integer "board_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "list_id"
   end
 
 end

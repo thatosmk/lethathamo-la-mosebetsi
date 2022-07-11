@@ -1,0 +1,12 @@
+      <%= content_tag(:section, class: 'card-container') do%>
+        <div class="flex items-center justify-between">
+          <%= content_tag(:h3, list.name, class: 'h4') %>
+          <%= link_to t('app.add'), new_list_task_path(list), class: 'link', data: { turbo_frame: :frameNewCardModal } %>
+        </div>
+        <%= turbo_stream_from list, :list_cards %>
+        <%= content_tag(:section, id: "frameListCards-#{list.id}") do %>
+          <% list.cards.each do |card|%>
+            <%= render 'tasks/task', card: card %>
+          <% end %>
+        <% end %>
+      <% end %>

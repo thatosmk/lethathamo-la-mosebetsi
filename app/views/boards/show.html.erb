@@ -1,16 +1,21 @@
+<%= turbo_frame_tag :frameAppHeader do %>
+  <%= content_tag(:header, class: 'header') do %>
+    <%= content_tag(:h1, @board.name, class: 'h1 text-white') %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream_from @board, :board_lists %>
+<%= turbo_frame_tag "frameBoard-#{@board.id}" do %>
 <%= content_tag(:div, class: 'main-layout') do%>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8">
-  <%= content_tag(:section) do%>
-    <div class="flex items-center justify-between">
-        <%= content_tag(:h3, t('app.todo'), class: 'h4') %>
-        <%= link_to t('app.add'), new_board_task_path(@board), class: 'underline' %>
-    </div>
-  <% end %>
-  <%= content_tag(:section) do%>
-    <%= content_tag(:h3, t('app.doing'), class: 'h4') %>
-  <% end %>
-  <%= content_tag(:section) do%>
-    <%= content_tag(:h3, t('app.done'), class: 'h4') %>
-  <% end %>
+  <div class="my-4">
+    <%= link_to t('app.back'), root_path, class: 'link', data: { turbo_frame: :_top } %>
   </div>
+
+  <div id="frameBoardLists-<%= @board.id %>" class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8">
+    <% @board.lists.each do |list|%>
+      <%= render 'lists/list', list: list %>
+    <% end %>
+  </div>
+<% end %>
+
 <% end %>

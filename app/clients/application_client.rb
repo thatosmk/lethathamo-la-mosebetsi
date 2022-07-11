@@ -12,6 +12,8 @@ class ApplicationClient
         content_type: /\bjson$/,
         parser_options: { symbolize_names: true }
 
+      # TODO: configure retries
+
       faraday.adapter :net_http
     end
   end

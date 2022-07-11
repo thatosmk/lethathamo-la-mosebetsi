@@ -30,17 +30,18 @@ class TrelloClient < ApplicationClient
     response = connection.get("#{base_uri}#{url}key=#{api_key}&token=#{token}")
 
     if response.status == 200
-      return response.body
+      response.body
     else
       raise UnsuccessfulResponse
     end
   end
 
+  # FIXME: remove unused params param
   def push_data(params)
     response = connection.post("#{base_uri}#{url}key=#{api_key}&token=#{token}")
 
     if response.status == 200
-      return response.body
+      response.body
     else
       raise UnsuccessfulResponse
     end
