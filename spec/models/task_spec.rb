@@ -4,7 +4,7 @@ RSpec.describe Task, type: :model do
 
   subject { described_class.new(attributes) }
 
-  let(:attributes) { { name: name, status: rand(0..3), board: board, deadline: Time.current } }
+  let(:attributes) { { name: name, status: 0, board: board, deadline: Time.current } }
   let(:name)       { }
   let(:board)      { }
 
