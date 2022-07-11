@@ -3,10 +3,12 @@
 class BoardsController < ApplicationController
 
   def index
-
+    find_trello_boards
+    @boards ||= Board.all
   end
 
   def show
+    fetch_cards_for_board
     @board = board
   end
 
@@ -19,6 +21,7 @@ class BoardsController < ApplicationController
 
     if @board.valid?
       @board.save
+
       redirect_to board_path(@board)
     else
       render :new, status: :unprocessable_entity
@@ -33,6 +36,19 @@ class BoardsController < ApplicationController
 
     def board_params
       params.require(:board).permit(:name)
+    end
+
+    def find_trello_boards
+      @_find_trello_boards ||= AppServicesJob.perform_later(
+        'Boards::GetTrelloBoardService'
+      )
+    end
+
+    def fetch_cards_for_board
+      @_fetch_cards_for_board ||= AppServicesJob.perform_later(
+        'Boards::GetBoardCardsService',
+        { board: board }
+      )
     end
 
 end

@@ -10,9 +10,10 @@ RSpec.describe "Tasks", type: :request do
 
   describe '#create' do
     let(:board) { Board.create({ name: 'A different name'}) }
+    let(:list) { List.create({ board: board, name: 'A different name'}) }
     let(:name)  { }
 
-    subject { post board_tasks_path(board_id: board.id), params: params }
+    subject { post list_tasks_path(list_id: list.id), params: params }
 
     let(:params) do
       {
@@ -20,7 +21,7 @@ RSpec.describe "Tasks", type: :request do
           board:    board,
           deadline: Time.current,
           name:     name,
-          status:   rand(0..2)
+          status:   0
         }
       }
     end
@@ -31,7 +32,7 @@ RSpec.describe "Tasks", type: :request do
         expect{
           subject
         }.to change(Task, :count).by(1)
-         .and change(board.tasks, :count).by(1)
+         .and change(list.cards, :count).by(1)
       end
       it { expect(subject).to redirect_to(board_path(board)) }
     end

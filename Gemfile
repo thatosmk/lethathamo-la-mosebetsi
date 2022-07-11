@@ -70,4 +70,6 @@ group :development, :test do
   gem "webdrivers"
 end
 
+gem 'faraday'
+gem 'pry-rails'
 gem "tailwindcss-rails", "~> 2.0"

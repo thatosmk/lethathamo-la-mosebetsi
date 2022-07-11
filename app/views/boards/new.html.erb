@@ -1,8 +1,10 @@
-<%= content_tag(:div, class: 'main-layout') do%>
-  <%= form_with(model: @board, url: boards_path, local: true, data: { turbo: :false }) do |f|%>
-    <%= f.label :name%>
-    <%= f.text_field :name, placeholder: 'name', required: true %>
+<%= turbo_frame_tag :frameBoards, target: :_top do %>
+  <%= content_tag(:div, class: 'main-layout') do%>
+    <%= form_with(model: @board, url: boards_path, local: true, data: { turbo: :false }) do |f|%>
+      <%= f.label :name%>
+      <%= f.text_field :name, placeholder: 'name', required: true %>
 
-    <%= f.submit t('app.submit') %>
+      <%= f.submit t('app.submit') %>
+    <% end %>
   <% end %>
 <% end %>
