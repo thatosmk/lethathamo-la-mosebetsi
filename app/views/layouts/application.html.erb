@@ -12,12 +12,6 @@
   </head>
 
   <body>
-    <%= turbo_frame_tag :frameAppHeader %>
-    <%= turbo_frame_tag :frameNewCardModal %>
-    <main class="boards-container">
-      <%= turbo_frame_tag :frameMainContainer do %>
-        <%= yield %>
-      <% end %>
-    </main>
+    <div id="app"></div>
   </body>
 </html>

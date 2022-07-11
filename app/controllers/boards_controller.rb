@@ -3,13 +3,23 @@
 class BoardsController < ApplicationController
 
   def index
-    find_trello_boards
+    # find_trello_boards
     @boards ||= Board.all
-  end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @boards.to_json }
+    end
+   end
 
   def show
-    fetch_cards_for_board
+    #fetch_cards_for_board
     @board = board
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @board.to_json }
+    end
   end
 
   def new
