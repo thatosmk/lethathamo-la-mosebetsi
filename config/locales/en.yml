@@ -32,11 +32,12 @@
 en:
   app:
     add: Add
-    brand_name: "The Pizza Project"
+    brand_name: Trello Clone
     doing: Doing
     done: Done
     submit: Create
     todo: To do
+    new_card: Create a new card
 
     boards:
       new: Add new board

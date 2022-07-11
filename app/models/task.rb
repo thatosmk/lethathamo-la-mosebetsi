@@ -6,6 +6,6 @@ class Task < ApplicationRecord
 
   validates :name, presence: true
 
-  enum status: { todo: 0, doing: 1, done: 2, other: 99 }
+  enum status: { todo: 0, doing: 1, done: 2, other: 99 } # REMOVE: no needed anymore
 
 end

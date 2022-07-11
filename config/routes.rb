@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   resources :boards,
     except: %i[destroy] do
-      resources :tasks
-
+      resources :lists,
+        shallow: true do
+          resources :tasks, path: 'cards', shallow: true
+      end
   end
 
   root "boards#index"

@@ -12,11 +12,12 @@
   </head>
 
   <body>
-    <header class="header">
-      <%= content_tag(:h1, t('app.brand_name'), class: 'h1 text-white text-center') %>
-    </header>
+    <%= turbo_frame_tag :frameAppHeader %>
+    <%= turbo_frame_tag :frameNewCardModal %>
     <main class="boards-container">
-    <%= yield %>
+      <%= turbo_frame_tag :frameMainContainer do %>
+        <%= yield %>
+      <% end %>
     </main>
   </body>
 </html>
