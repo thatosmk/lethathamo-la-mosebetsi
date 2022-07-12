@@ -3,7 +3,7 @@
 class BoardsController < ApplicationController
 
   def index
-    # find_trello_boards
+    find_trello_boards
     @boards ||= Board.all
 
     respond_to do |format|
@@ -13,7 +13,7 @@ class BoardsController < ApplicationController
    end
 
   def show
-    #fetch_cards_for_board
+    fetch_cards_for_board
     @board = board
 
     respond_to do |format|
